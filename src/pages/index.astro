@@ -59,15 +59,21 @@ const images = import.meta.glob("/src/assets/*.jpg", { eager: true });
     <div class="max-w-6xl mx-auto px-4">
       <div class="flex space-x-4 overflow-x-auto">
         {
-          Object.entries(images).map(([path, module]) => (
-            <Image
-              src={path}
-              width={48}
-              height={48}
-              alt="instagram photo"
-              class="w-48 h-48 object-cover rounded-lg shadow-md flex-shrink-0"
-            />
-          ))
+          Object.entries(images)
+            .sort((a, b) => {
+              const [p1] = a;
+              const [p2] = b;
+              return p2.localeCompare(p1);
+            })
+            .map(([path, module]) => (
+              <Image
+                src={path}
+                width={48}
+                height={48}
+                alt="instagram photo"
+                class="w-48 h-48 object-cover rounded-lg shadow-md flex-shrink-0"
+              />
+            ))
         }
       </div>
     </div>
