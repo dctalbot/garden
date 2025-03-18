@@ -1,6 +1,7 @@
 name: Hourly Build
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: "0 * * * *"
 
