@@ -11,20 +11,25 @@ const heroImage = Object.values(
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
+const mapbox1 = Object.values(
+  import.meta.glob("/src/assets/img/maps/mapbox1.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
 ---
 
 <Layout>
   <!-- Hero Section -->
-  <div class="relative h-[50vh] min-h-[400px] w-full">
+  <div class="relative w-full">
     <Image
       src={heroImage}
       alt="Community Garden"
-      class="mt-4 px-16 absolute inset-0 h-full object-contain"
+      class="px-8 object-contain max-w-[400px] mx-auto bg-white py-8 h-full"
     />
   </div>
 
   <!-- About Section -->
-  <div class="bg-white pt-16 pb-8">
+  <div class="bg-white pt-2 pb-8">
     <div class="max-w-3xl mx-auto px-4 text-center">
       <h2 class="text-3xl font-bold text-garden-green mb-6">
         About Our Garden
@@ -91,7 +96,7 @@ const heroImage = Object.values(
 
   <!-- Main Content -->
   <div
-    class="min-h-screen bg-gradient-to-b from-garden-green to-leaf px-4 py-16"
+    class="min-h-screen bg-gradient-to-b from-garden-green to-leaf px-4 pt-16"
   >
     <div class="max-w-2xl mx-auto">
       <!-- Social Links -->
@@ -181,10 +186,72 @@ const heroImage = Object.values(
 
       <!-- Footer -->
       <footer class="mt-12 text-center text-white text-sm">
-        <!-- <p class="opacity-70">
-          © {new Date().getFullYear()} Community Garden. All rights reserved.
-        </p> -->
+        <!-- src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-l-garden+EA4335(-73.949,40.72065)/-73.9517,40.7209,14.4,0/800x250@2x?access_token=pk.eyJ1IjoiZGN0YWxib3QiLCJhIjoiY2oyZTA1M2YyMDRzbjJxczVkNTAzOGxlbCJ9.d4nW2fje4KFA7TPNJoH8FA&logo=false" -->
+
+        <Image
+          alt="Community Garden"
+          src={mapbox1}
+          width={800}
+          height={250}
+          class="rounded-xl"
+          onerror="this.style.display='none'"
+        />
       </footer>
     </div>
   </div>
+
+  <div
+    id="veg-background"
+    style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; z-index: -1;"
+  >
+  </div>
 </Layout>
+
+<script>
+  if (window.innerWidth > 700) {
+    for (let i = 0; i < 50; i++) {
+      const img = document.createElement("img");
+      img.style.animation = "rotate-cute 2s infinite ease-in-out";
+
+      const style = document.createElement("style");
+      style.textContent = `
+        @keyframes rotate-cute {
+        0%, 100% {
+          transform: rotate(-10deg);
+        }
+        50% {
+          transform: rotate(10deg);
+        }
+        }
+      `;
+      document.head.appendChild(style);
+
+      img.src = "/src/assets/img/veg/broccoli.png";
+      const vegImages = [
+        "/src/assets/img/veg/broccoli.png",
+        "/src/assets/img/veg/butternut-squash.webp",
+        "/src/assets/img/veg/carrot.png",
+        "/src/assets/img/veg/collards.png",
+        "/src/assets/img/veg/corn.png",
+        "/src/assets/img/veg/cucumber.png",
+        "/src/assets/img/veg/greenbean.png",
+        "/src/assets/img/veg/kale.png",
+        "/src/assets/img/veg/parsley.webp",
+        "/src/assets/img/veg/shishito.png",
+        "/src/assets/img/veg/strawberry.webp",
+        "/src/assets/img/veg/tomato.png",
+      ];
+      img.src = vegImages[Math.floor(Math.random() * vegImages.length)];
+      img.addEventListener("mouseover", () => {
+        img.src = vegImages[Math.floor(Math.random() * vegImages.length)];
+      });
+      img.style.objectFit = "contain";
+      img.style.position = "relative";
+      img.style.display = "inline-block";
+      img.style.width = "100px";
+      img.style.height = "100px";
+      img.style.padding = "10px";
+      document.getElementById("veg-background").appendChild(img);
+    }
+  }
+</script>
