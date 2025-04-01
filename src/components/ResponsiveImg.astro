@@ -1,0 +1,55 @@
+---
+import { getImage } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// https://tailwindcss.com/docs/responsive-design
+// Breakpoint prefix	Minimum width	CSS
+// sm	40rem (640px)	@media (width >= 40rem) { ... }
+// md	48rem (768px)	@media (width >= 48rem) { ... }
+// lg	64rem (1024px)	@media (width >= 64rem) { ... }
+// xl	80rem (1280px)	@media (width >= 80rem) { ... }
+
+interface Props {
+  xs: ImageMetadata; // img url 640px
+  sm: ImageMetadata; // img url 768px
+  md: ImageMetadata; // img url 1024px
+  lg: ImageMetadata; // img url 1280px
+  xl: ImageMetadata; // img url 1536px
+  alt: string;
+}
+
+const { xs, sm, md, lg, xl, alt } = Astro.props;
+
+const xsImg = await getImage({
+  src: xs,
+});
+
+const smImg = await getImage({
+  src: sm,
+});
+
+const mdImg = await getImage({
+  src: md,
+});
+
+const lgImg = await getImage({
+  src: lg,
+});
+
+const xlImg = await getImage({
+  src: xl,
+});
+---
+
+<picture>
+  <source media="(max-width: 640px)" srcset={xsImg.src} />
+  <source media="(max-width: 768px)" srcset={smImg.src} />
+  <source media="(max-width: 1024px)" srcset={mdImg.src} />
+  <source media="(max-width: 1280px)" srcset={lgImg.src} />
+  <source media="(min-width: 1280px)" srcset={xlImg.src} />
+  <img
+    src={xlImg.src}
+    alt={alt}
+    class="w-full max-h-[250px] object-cover overflow-hidden mx-auto"
+  />
+</picture>
