@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import ResponsiveImg from "../components/ResponsiveImg.astro";
+import Card from "../components/Card.astro";
 let _images = import.meta.glob("/src/assets/*.jpg", { eager: true });
 const images = Object.values(_images).map((mod) => mod.default);
 images.sort((a, b) => {
@@ -39,6 +40,12 @@ const mapbox1280 = Object.values(
 
 const mapbox1536 = Object.values(
   import.meta.glob("/src/assets/img/mapbox-outdoor/768x250@2x.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const ky = Object.values(
+  import.meta.glob("/src/assets/img/people/ky.png", {
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
@@ -84,20 +91,6 @@ const mapbox1536 = Object.values(
           <li>Raised $14K for North Brooklyn Mutual Aid</li>
         </ul>
       </p>
-      <!-- <div class="grid grid-cols-3 gap-4 text-center">
-        <div>
-          <p class="text-3xl font-bold text-garden-green">50+</p>
-          <p class="text-gray-600">Active Members</p>
-        </div>
-        <div>
-          <p class="text-3xl font-bold text-garden-green">100</p>
-          <p class="text-gray-600">Garden Plots</p>
-        </div>
-        <div>
-          <p class="text-3xl font-bold text-garden-green">12</p>
-          <p class="text-gray-600">Monthly Events</p>
-        </div>
-      </div> -->
     </div>
   </div>
 
@@ -121,9 +114,7 @@ const mapbox1536 = Object.values(
   </div>
 
   <!-- Main Content -->
-  <div
-    class="min-h-screen bg-gradient-to-b from-garden-green to-leaf px-4 pt-16"
-  >
+  <div class="bg-gradient-to-b from-garden-green to-leaf px-4 py-12">
     <div class="max-w-2xl mx-auto">
       <!-- Social Links -->
       <!-- <div class="flex justify-center space-x-4 mb-12">
@@ -159,78 +150,55 @@ const mapbox1536 = Object.values(
       </div> -->
 
       <!-- Links Section -->
-      <div class="space-y-4">
-        <a
-          href="https://docs.google.com/document/d/1jRYqglmPRjCGxLIhoPQzQApvLKHElvUfJz6Uus10ors/edit?tab=t.0"
-          class="block bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-4 rounded-xl backdrop-blur-sm border border-white border-opacity-20 transition-all transform hover:scale-[1.02]"
-        >
-          <div class="flex items-center">
-            <span class="text-lg font-medium">FAQ and Start Guide</span>
-          </div>
-        </a>
 
-        <a
-          href="https://airtable.com/app5nMTvpXuuhRz8Y/shrZDcxqACpuOo4dA"
-          class="block bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-4 rounded-xl backdrop-blur-sm border border-white border-opacity-20 transition-all transform hover:scale-[1.02]"
-        >
-          <div class="flex items-center">
-            <!-- <svg
-              class="w-6 h-6 mr-3"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"
-              ></path>
-            </svg> -->
-            <span class="text-lg font-medium">Volunteer</span>
-          </div>
-        </a>
-
-        <a
-          href="https://www.grownyc.org/waiver"
-          class="block bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-4 rounded-xl backdrop-blur-sm border border-white border-opacity-20 transition-all transform hover:scale-[1.02]"
-        >
-          <div class="flex items-center">
-            <span class="text-lg font-medium">Volunteer Waiver</span>
-          </div>
-        </a>
-
-        <a
-          href="https://hcb.hackclub.com/donations/start/north-brooklyn-mutual-aid"
-          class="block bg-white bg-opacity-10 hover:bg-opacity-20 text-white p-4 rounded-xl backdrop-blur-sm border border-white border-opacity-20 transition-all transform hover:scale-[1.02]"
-        >
-          <div class="flex items-center">
-            <span class="text-lg font-medium">Donate</span>
-          </div>
-        </a>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Card
+          image={ky}
+          title="FAQ and Start Guide"
+          blurb="Learn more about the garden and how to get started"
+          url="https://docs.google.com/document/d/1jRYqglmPRjCGxLIhoPQzQApvLKHElvUfJz6Uus10ors/edit?tab=t.0"
+        />
+        <Card
+          image={ky}
+          title="Volunteer"
+          blurb="Sign up to volunteer at the garden"
+          url="https://airtable.com/app5nMTvpXuuhRz8Y/shrZDcxqACpuOo4dA"
+        />
+        <Card
+          image={ky}
+          title="Volunteer Waiver"
+          blurb="Fill out the volunteer waiver"
+          url="https://www.grownyc.org/waiver"
+        />
+        <Card
+          image={ky}
+          title="Donate"
+          blurb="Support the garden and our mission"
+          url="https://hcb.hackclub.com/donations/start/north-brooklyn-mutual-aid"
+        />
       </div>
     </div>
   </div>
+</Layout>
 
-  <!-- Footer -->
-  <footer class="text-center text-white text-sm">
-    <!-- src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-l-garden+EA4335(-73.949,40.72065)/-73.9517,40.7209,14.4,0/800x250@2x?access_token=pk.eyJ1IjoiZGN0YWxib3QiLCJhIjoiY2oyZTA1M2YyMDRzbjJxczVkNTAzOGxlbCJ9.d4nW2fje4KFA7TPNJoH8FA&logo=false" -->
+<!-- Footer -->
+<footer class="text-center text-white text-sm">
+  <!-- src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-l-garden+EA4335(-73.949,40.72065)/-73.9517,40.7209,14.4,0/800x250@2x?access_token=pk.eyJ1IjoiZGN0YWxib3QiLCJhIjoiY2oyZTA1M2YyMDRzbjJxczVkNTAzOGxlbCJ9.d4nW2fje4KFA7TPNJoH8FA&logo=false" -->
 
-    <ResponsiveImg
-      xs={mapbox640}
-      sm={mapbox768}
-      md={mapbox1024}
-      lg={mapbox1280}
-      xl={mapbox1536}
-      alt="Map of garden location"
-    />
-  </footer>
+  <ResponsiveImg
+    xs={mapbox640}
+    sm={mapbox768}
+    md={mapbox1024}
+    lg={mapbox1280}
+    xl={mapbox1536}
+    alt="Map of garden location"
+  />
+</footer>
 
-  <!-- <div
+<!-- <div
     id="veg-background"
     style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; z-index: -1;"
   > -->
-</Layout>
 
 <script>
   if (window.innerWidth > 700) {
