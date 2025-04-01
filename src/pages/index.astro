@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
+import ResponsiveImg from "../components/ResponsiveImg.astro";
 let _images = import.meta.glob("/src/assets/*.jpg", { eager: true });
 const images = Object.values(_images).map((mod) => mod.default);
 images.sort((a, b) => {
@@ -11,8 +12,33 @@ const heroImage = Object.values(
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
-const mapbox1 = Object.values(
-  import.meta.glob("/src/assets/img/maps/mapbox1.png", {
+
+const mapbox640 = Object.values(
+  import.meta.glob("/src/assets/img/mapbox-outdoor/320x250@2x.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const mapbox768 = Object.values(
+  import.meta.glob("/src/assets/img/mapbox-outdoor/384x250@2x.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const mapbox1024 = Object.values(
+  import.meta.glob("/src/assets/img/mapbox-outdoor/512x250@2x.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const mapbox1280 = Object.values(
+  import.meta.glob("/src/assets/img/mapbox-outdoor/640x250@2x.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const mapbox1536 = Object.values(
+  import.meta.glob("/src/assets/img/mapbox-outdoor/768x250@2x.png", {
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
@@ -183,28 +209,27 @@ const mapbox1 = Object.values(
           </div>
         </a>
       </div>
-
-      <!-- Footer -->
-      <footer class="mt-12 text-center text-white text-sm">
-        <!-- src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-l-garden+EA4335(-73.949,40.72065)/-73.9517,40.7209,14.4,0/800x250@2x?access_token=pk.eyJ1IjoiZGN0YWxib3QiLCJhIjoiY2oyZTA1M2YyMDRzbjJxczVkNTAzOGxlbCJ9.d4nW2fje4KFA7TPNJoH8FA&logo=false" -->
-
-        <Image
-          alt="Community Garden"
-          src={mapbox1}
-          width={800}
-          height={250}
-          class="rounded-xl"
-          onerror="this.style.display='none'"
-        />
-      </footer>
     </div>
   </div>
 
-  <div
+  <!-- Footer -->
+  <footer class="text-center text-white text-sm">
+    <!-- src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-l-garden+EA4335(-73.949,40.72065)/-73.9517,40.7209,14.4,0/800x250@2x?access_token=pk.eyJ1IjoiZGN0YWxib3QiLCJhIjoiY2oyZTA1M2YyMDRzbjJxczVkNTAzOGxlbCJ9.d4nW2fje4KFA7TPNJoH8FA&logo=false" -->
+
+    <ResponsiveImg
+      xs={mapbox640}
+      sm={mapbox768}
+      md={mapbox1024}
+      lg={mapbox1280}
+      xl={mapbox1536}
+      alt="Map of garden location"
+    />
+  </footer>
+
+  <!-- <div
     id="veg-background"
     style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; z-index: -1;"
-  >
-  </div>
+  > -->
 </Layout>
 
 <script>
