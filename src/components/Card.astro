@@ -16,8 +16,36 @@ const { image, title, blurb, url } = Astro.props;
     <div
       class="relative z-10 px-6 py-4 bg-black bg-opacity-50 text-white h-full flex flex-col justify-start"
     >
-      <h2 class="font-bold text-xl mb-2">{title}</h2>
-      <p class="text-base">{blurb}</p>
+      <h2 class="font-bold text-3xl mb-2">{title}</h2>
+      <p class="text-lg">{blurb}</p>
     </div>
   </a>
 </div>
+
+<style is:global>
+  @font-face {
+    font-family: "Dear";
+    src: url("/fonts/dear/vector.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Zine";
+    src: url("/fonts/zine/vector.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+</style>
+
+<style>
+  h2 {
+    font-family: "Dear";
+  }
+  p {
+    font-family: "Zine";
+    color: white;
+  }
+</style>
