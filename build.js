@@ -96,7 +96,7 @@ function filterForNewMedia(stored, fetched) {
  * An array of media objects.
  */
 function getStoredMedia() {
-  return JSON.parse(fs.readFileSync("./db.json", "utf-8"))["media"];
+  return JSON.parse(fs.readFileSync("./src/db.json", "utf-8"))["media"];
 }
 
 /**
@@ -105,9 +105,9 @@ function getStoredMedia() {
  * @param {{id: string, permalink: string, timestamp: string}} m - The new media object.
  */
 function insertMedia(m) {
-  const db = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  const db = JSON.parse(fs.readFileSync("./src/db.json", "utf-8"));
   db["media"] = [...db["media"], m];
-  fs.writeFileSync("./db.json", JSON.stringify(db, null, 2));
+  fs.writeFileSync("./src/db.json", JSON.stringify(db, null, 2));
 }
 
 /**

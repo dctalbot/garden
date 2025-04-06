@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import ResponsiveImg from "../components/ResponsiveImg.astro";
 import Card from "../components/Card.astro";
-import * as db from "../../db.json";
+import * as db from "../db.json";
 let _images = import.meta.glob("/src/assets/img/insta/*.jpg", { eager: true });
 const images = Object.values(_images).map((mod) => mod.default);
 images.sort((a, b) => {
