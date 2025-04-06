@@ -124,10 +124,7 @@ async function main() {
 
     for (const { id, media_url, timestamp, permalink } of newMedia) {
       const bytes = await getImgBytes(media_url);
-      writeImgFile(
-        Promise.resolve(bytes),
-        `./src/assets/img/insta/${timestamp}::${id}.jpg`,
-      );
+      writeImgFile(Promise.resolve(bytes), `./src/assets/img/insta/${id}.jpg`);
       insertMedia({
         id,
         timestamp,

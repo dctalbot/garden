@@ -4,23 +4,20 @@ import Layout from "../layouts/Layout.astro";
 import ResponsiveImg from "../components/ResponsiveImg.astro";
 import Card from "../components/Card.astro";
 import db from "../db.json";
-let _images = import.meta.glob("/src/assets/img/insta/*.jpg", { eager: true });
-const images = Object.values(_images).map((mod) => mod.default);
-images.sort((a, b) => {
-  return b.src.localeCompare(a.src);
-});
 
-const permalinks = db["media"].reduce((acc, item) => {
-  acc[item.id] = item["permalink"];
-  return acc;
-}, {});
+const instaAstroImages = Object.values(
+  import.meta.glob("/src/assets/img/insta/*.jpg", { eager: true }),
+).map((mod) => mod.default);
 
-images.forEach((img) => {
-  const id = img.src.split("::").pop().split(".jpg").shift();
-  img.permalink = permalinks[id];
-});
-
-console.log(images);
+const images = db["media"]
+  .sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp))
+  .map((m) => {
+    const img = instaAstroImages.find((img) => img.src.includes(m.id));
+    return {
+      ...m,
+      src: img,
+    };
+  });
 
 const heroImage = Object.values(
   import.meta.glob("/src/assets/MDG_garden-sign_01.png", {
@@ -117,13 +114,10 @@ const sy = Object.values(
       <div class="max-w-6xl mx-auto p-4">
         <div class="flex space-x-4 overflow-x-auto">
           {
-            images.map((path) => (
-              <a
-                href={path.permalink}
-                class="h-full flex-shrink-0 aspect-square "
-              >
+            images.map((i) => (
+              <a href={i.permalink} class="h-full flex-shrink-0 aspect-square ">
                 <Image
-                  src={path}
+                  src={i.src}
                   width={300}
                   height={300}
                   alt="instagram photo"
