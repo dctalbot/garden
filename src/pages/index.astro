@@ -65,6 +65,12 @@ const sy = Object.values(
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
+
+const labyrinth = Object.values(
+  import.meta.glob("/src/assets/img/labyrinth-green.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
 ---
 
 <Layout>
@@ -111,17 +117,23 @@ const sy = Object.values(
     <section id="insta-section" class="">
       <h2 class="text-2xl">Recently...</h2>
 
-      <div class="max-w-6xl mx-auto p-4">
+      <div
+        class="max-w-6xl mx-auto p-4 bg-center bg-[length:75%] bg-no-repeat"
+        style={`background-image: url('${labyrinth?.src || ""}');`}
+      >
         <div class="flex space-x-4 overflow-x-auto">
           {
             images.map((i) => (
-              <a href={i.permalink} class="h-full flex-shrink-0 aspect-square ">
+              <a
+                href={i.permalink}
+                class="h-full rounded-2xl flex-shrink-0 aspect-square bg-black"
+              >
                 <Image
                   src={i.src}
                   width={300}
                   height={300}
                   alt="instagram photo"
-                  class="h-full rounded-2xl object-cover flex-shrink-0 aspect-square   hover:opacity-75"
+                  class="h-full  rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
                 />
               </a>
             ))
