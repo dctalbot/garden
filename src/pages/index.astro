@@ -3,11 +3,25 @@ import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import ResponsiveImg from "../components/ResponsiveImg.astro";
 import Card from "../components/Card.astro";
-let _images = import.meta.glob("/src/assets/*.jpg", { eager: true });
+import * as db from "../../db.json";
+let _images = import.meta.glob("/src/assets/img/insta/*.jpg", { eager: true });
 const images = Object.values(_images).map((mod) => mod.default);
 images.sort((a, b) => {
   return b.src.localeCompare(a.src);
 });
+
+const permalinks = db["media"].reduce((acc, item) => {
+  acc[item.id] = item["permalink"];
+  return acc;
+}, {});
+
+images.forEach((img) => {
+  const id = img.src.split("::").pop().split(".jpg").shift();
+  img.permalink = permalinks[id];
+});
+
+console.log(images);
+
 const heroImage = Object.values(
   import.meta.glob("/src/assets/MDG_garden-sign_01.png", {
     eager: true,
@@ -98,17 +112,24 @@ const sy = Object.values(
     </section>
 
     <section id="insta-section" class="">
+      <h2 class="text-2xl">Recently...</h2>
+
       <div class="max-w-6xl mx-auto p-4">
         <div class="flex space-x-4 overflow-x-auto">
           {
             images.map((path) => (
-              <Image
-                src={path}
-                width={300}
-                height={300}
-                alt="instagram photo"
-                class="h-full rounded-2xl object-cover shadow-md flex-shrink-0 aspect-square"
-              />
+              <a
+                href={path.permalink}
+                class="h-full flex-shrink-0 aspect-square "
+              >
+                <Image
+                  src={path}
+                  width={300}
+                  height={300}
+                  alt="instagram photo"
+                  class="h-full rounded-2xl object-cover flex-shrink-0 aspect-square   hover:opacity-75"
+                />
+              </a>
             ))
           }
         </div>
@@ -157,14 +178,20 @@ const sy = Object.values(
         lg={mapbox1280}
         xl={mapbox1536}
          -->
-      <ResponsiveImg
-        xs={mapbox640}
-        sm={mapbox640}
-        md={mapbox640}
-        lg={mapbox640}
-        xl={mapbox640}
-        alt="Map of garden location"
-      />
+      <a
+        href="https://maps.app.goo.gl/XBrreUGBQAK3nwfw8"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <ResponsiveImg
+          xs={mapbox640}
+          sm={mapbox640}
+          md={mapbox640}
+          lg={mapbox640}
+          xl={mapbox640}
+          alt="Map of garden location"
+        />
+      </a>
     </section>
   </main>
 </Layout>

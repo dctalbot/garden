@@ -4,13 +4,13 @@ import fs from "fs";
 /**
  * Fetches media data from Instagram API. API reference: https://developers.facebook.com/docs/instagram-platform/reference/instagram-media
  *
- * @returns {Promise<Array<{id: string, media_url: string, timestamp: string}>>}
- * An array of media objects containing id, media_url, and timestamp.
+ * @returns {Promise<Array<{id: string, media_url: string, permalink: string, timestamp: string}>>}
+ * An array of media objects.
  * @throws Will throw an error if the request fails.
  */
 async function getMedia() {
   const REQUEST_URL =
-    "https://graph.instagram.com/v21.0/me/media?fields=media_url,id,timestamp";
+    "https://graph.instagram.com/v21.0/me/media?fields=media_url,id,timestamp,permalink";
 
   const res = await new Promise((resolve, reject) => {
     https.get(
@@ -82,16 +82,32 @@ function writeImgFile(inputData, path) {
 }
 
 /**
- * Filters out media data that corresponds to files already existing in the "./src/assets" directory.
- *
- * @param {Array} mediaData - An array of media objects, each containing an `id` property.
- * @returns {Array} - A filtered array of media objects that do not have corresponding files in the "./src/assets" directory.
+ * @returns {Array<{id: string, media_url: string, permalink: string, timestamp: string}>}
  */
-function filterOutOldMedia(mediaData) {
-  const existingFiles = fs.readdirSync("./src/assets");
-  return mediaData.filter(
-    ({ id }) => !existingFiles.some((f) => f.includes(id)),
-  );
+function filterForNewMedia(stored, fetched) {
+  const existingIds = stored.map(({ id }) => id);
+  return fetched.filter(({ id }) => !existingIds.includes(id));
+}
+
+/**
+ * gets media data from file store
+ *
+ * @returns {Array<{id: string, permalink: string, timestamp: string}>}
+ * An array of media objects.
+ */
+function getStoredMedia() {
+  return JSON.parse(fs.readFileSync("./db.json", "utf-8"))["media"];
+}
+
+/**
+ * Updates the file store
+ *
+ * @param {{id: string, permalink: string, timestamp: string}} m - The new media object.
+ */
+function insertMedia(m) {
+  const db = JSON.parse(fs.readFileSync("./db.json", "utf-8"));
+  db["media"] = [...db["media"], m];
+  fs.writeFileSync("./db.json", JSON.stringify(db, null, 2));
 }
 
 /**
@@ -102,15 +118,21 @@ function filterOutOldMedia(mediaData) {
  */
 async function main() {
   try {
-    const mediaData = await getMedia();
-    const newMedia = filterOutOldMedia(mediaData);
+    const storedMedia = getStoredMedia();
+    const fetchedMedia = await getMedia();
+    const newMedia = filterForNewMedia(storedMedia, fetchedMedia);
 
-    for (const { id, media_url, timestamp } of newMedia) {
+    for (const { id, media_url, timestamp, permalink } of newMedia) {
       const bytes = await getImgBytes(media_url);
       writeImgFile(
         Promise.resolve(bytes),
-        `./src/assets/${timestamp}::${id}.jpg`,
+        `./src/assets/img/insta/${timestamp}::${id}.jpg`,
       );
+      insertMedia({
+        id,
+        timestamp,
+        permalink,
+      });
     }
   } catch (err) {
     console.error(`Error: ${err.message}`);
