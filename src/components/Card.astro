@@ -4,17 +4,15 @@ import { Image } from "astro:assets";
 const { image, title, blurb, url } = Astro.props;
 ---
 
-<div
-  class="relative flex-1 rounded overflow-hidden shadow-lg bg-white w-full h-full hover:shadow-[0_0_15px_rgba(255,255,255,0.8)] transition-shadow duration-300"
->
-  <a href={url} class="block h-full">
+<div class="relative flex-1 overflow-hidden w-full h-72">
+  <a href={url} class="block relative w-full h-full">
     <Image
-      class="absolute inset-0 w-full h-full object-cover"
+      class="absolute inset-0 w-full h-full object-cover object-center"
       src={image}
       alt={title}
     />
     <div
-      class="relative z-10 px-6 py-4 bg-black bg-opacity-50 text-white h-full flex flex-col justify-start"
+      class="relative z-10 px-6 py-4 bg-black bg-opacity-50 text-white h-full flex flex-col justify-start transition transition-opacity duration-300 hover:bg-opacity-75"
     >
       <h2 class="font-bold text-3xl mb-2">{title}</h2>
       <p class="text-lg">{blurb}</p>
