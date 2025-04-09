@@ -55,19 +55,32 @@ const mapbox1536 = Object.values(
   }),
 ).map((mod) => mod.default)[0];
 
-const ky = Object.values(
-  import.meta.glob("/src/assets/img/people/ky.png", {
-    eager: true,
-  }),
-).map((mod) => mod.default)[0];
-const sy = Object.values(
-  import.meta.glob("/src/assets/img/people/sy.png", {
+const labyrinth = Object.values(
+  import.meta.glob("/src/assets/img/labyrinth-green.png", {
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
 
-const labyrinth = Object.values(
-  import.meta.glob("/src/assets/img/labyrinth-green.png", {
+const greens = Object.values(
+  import.meta.glob("/src/assets/img/veg/greens.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const sunflower = Object.values(
+  import.meta.glob("/src/assets/img/veg/sunflower.JPG", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const strawberry = Object.values(
+  import.meta.glob("/src/assets/img/veg/strawberry.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
+const squash = Object.values(
+  import.meta.glob("/src/assets/img/veg/squash.JPG", {
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
@@ -83,42 +96,39 @@ const labyrinth = Object.values(
       />
     </section>
 
-    <section id="about-section" class="pt-2 pb-8">
+    <section id="about-section">
       <div class="max-w-3xl mx-auto px-4 text-center">
-        <!-- <h2 class="text-3xl font-bold mb-6">About Our Garden</h2> -->
+        <p class="text-2xl mb-8">Hello gardeners!</p>
         <p class="text-lg mb-8">
-          The McCarren Park Demonstration Garden was a ~$1M project developed
-          between GrowNYC and the Greenpoint Community Environmental Fund in
-          2015. Since 2022, the garden has been stewarded as a collaboration
-          between GrowNYC and North Brooklyn Mutual Aid with programming based
-          on community planning sessions. In that time, we’ve...
-          <ul class="list-disc list-inside text-left">
-            <li>
-              Donated 2,400 lbs of fresh veggies to free fridges with over grew
-              90+ varieties of plants
-            </li>
-            <li>
-              Hosted and participated in over 50 free events on eco education
-              and community building
-            </li>
-            <li>
-              Opened for gardening hours 3-4 days a week for 8 months of the
-              year
-            </li>
-            <li>
-              Engaged 560 volunteer sign ups and 2.8K followers on Instagram
-            </li>
-            <li>Raised $14K for North Brooklyn Mutual Aid</li>
-          </ul>
+          The McCarren Park Demonstration Garden is an initiative of North
+          Brooklyn Mutual Aid and GrowNYC. We're a space for environmental
+          education and climate justice, and we're so happy you're here.
+        </p>
+
+        <p class="text-lg mb-8">
+          There are no individual plots in our garden—we grow everything
+          together. We focus on food and flowers to stock our local free
+          fridges. In 2024, we harvested 935 lbs of produce for our neighbors!
+          We also provide free workshops and events for the community, and a
+          chance to make new friends while getting your hands a little dirty.
+        </p>
+
+        <p class="text-lg mb-8">
+          Our season runs from early May to late October, and we have three to
+          four gardening shifts per week. Read on for all the information you'll
+          need to join us. See you in the garden!
         </p>
       </div>
     </section>
 
-    <section id="insta-section" class="">
-      <h2 class="text-2xl">Recently...</h2>
+    <div class="holder">
+      <div class="ellipse"></div>
+      <div class="ellipse ellipse2"></div>
+    </div>
 
+    <section id="insta-section" class="">
       <div
-        class="max-w-6xl mx-auto p-4 bg-center bg-[length:75%] bg-no-repeat"
+        class="max-w-6xl mx-auto px-4 pb-2 bg-center bg-[length:30%] bg-no-repeat"
         style={`background-image: url('${labyrinth?.src || ""}');`}
       >
         <div class="flex space-x-4 overflow-x-auto">
@@ -133,7 +143,7 @@ const labyrinth = Object.values(
                   width={300}
                   height={300}
                   alt="instagram photo"
-                  class="h-full  rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
+                  class="h-full rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
                 />
               </a>
             ))
@@ -142,37 +152,71 @@ const labyrinth = Object.values(
       </div>
     </section>
 
+    <div class="holder">
+      <div class="ellipse"></div>
+      <div class="ellipse ellipse2"></div>
+    </div>
+
     <section>
-      <Card
-        image={ky}
-        title="FAQ and Start Guide"
-        blurb="Learn more about the garden and how to get started"
-        url="https://docs.google.com/document/d/1jRYqglmPRjCGxLIhoPQzQApvLKHElvUfJz6Uus10ors/edit?tab=t.0"
-      />
+      <Card image={greens} title="Getting Started">
+        <p>
+          Before your first volunteer shift, make sure to
+          <a href="https://www.grownyc.org/waiver"> sign the waiver</a>. Read
+          through our
+          <a
+            href="https://docs.google.com/document/d/1jRYqglmPRjCGxLIhoPQzQApvLKHElvUfJz6Uus10ors/edit?tab=t.0"
+          >
+            Start Guide and FAQ.
+          </a>
+        </p>
+      </Card>
     </section>
     <section>
-      <Card
-        image={sy}
-        title="Volunteer"
-        blurb="Sign up to volunteer at the garden"
-        url="https://airtable.com/app5nMTvpXuuhRz8Y/shrZDcxqACpuOo4dA"
-      />
+      <Card image={squash} title="Garden Tools">
+        <p>
+          Sign up for shifts using the
+          <a
+            href="https://docs.google.com/spreadsheets/d/1J_SYFs7HuJBDodQp0MgZ3faAvQ1oEFGRDZAptTvkzko/edit?gid=1721287157#gid=1721287157"
+          >
+            Volunteer Calendar</a
+          >. When you're at the garden, track what you're harvesting with the
+          <a
+            href="https://docs.google.com/forms/d/1yXXd05RVFYc7SIyqKZ-NDLo9klSCBq-4cy93X5X9hVM/edit"
+          >
+            Harvest Log.
+          </a>
+        </p>
+      </Card>
     </section>
     <section>
-      <Card
-        image={ky}
-        title="Volunteer Waiver"
-        blurb="Fill out the volunteer waiver"
-        url="https://www.grownyc.org/waiver"
-      />
+      <Card image={strawberry} title="Keep in touch">
+        <p>
+          Follow us on <a
+            href="https://www.instagram.com/mccarrendemogarden/?hl=en"
+          >
+            Instagram
+          </a> to find out about our upcoming events! Join our <a
+            href="https://greenpointstrong.slack.com/join/shared_invite/zt-2d7kg7fcn-gWYETElPoGOThEWVqvoO_w#/shared-invite/email"
+          >
+            Slack
+          </a> chat and subscribe to our <a
+            href="https://mccarrendemogarden.substack.com/"
+          >
+            newsletter</a
+          >.
+        </p>
+      </Card>
     </section>
     <section>
-      <Card
-        image={sy}
-        title="Donate"
-        blurb="Support the garden and our mission"
-        url="https://hcb.hackclub.com/donations/start/north-brooklyn-mutual-aid"
-      />
+      <Card image={sunflower} title="Donate">
+        <p>
+          Support the garden and our mission by <a
+            href="http://donate.mccarren.garden"
+          >
+            making a donation
+          </a>.
+        </p>
+      </Card>
     </section>
 
     <section class="bg-black overflow-hidden">
@@ -202,71 +246,38 @@ const labyrinth = Object.values(
   </main>
 </Layout>
 
-<!-- <div
-    id="veg-background"
-    style="height: 100vh; width: 100vw; position: absolute; top: 0; left: 0; z-index: -1;"
-  > -->
-
-<script>
-  if (window.innerWidth > 700) {
-    for (let i = 0; i < 50; i++) {
-      const img = document.createElement("img");
-      img.style.animation = "rotate-cute 2s infinite ease-in-out";
-
-      const style = document.createElement("style");
-      style.textContent = `
-        @keyframes rotate-cute {
-        0%, 100% {
-          transform: rotate(-10deg);
-        }
-        50% {
-          transform: rotate(10deg);
-        }
-        }
-      `;
-      document.head.appendChild(style);
-
-      img.src = "/img/veg/broccoli.png";
-      const vegImages = [
-        "/img/veg/broccoli.png",
-        "/img/veg/butternut-squash.webp",
-        "/img/veg/carrot.png",
-        "/img/veg/collards.png",
-        "/img/veg/corn.png",
-        "/img/veg/cucumber.png",
-        "/img/veg/greenbean.png",
-        "/img/veg/kale.png",
-        "/img/veg/parsley.webp",
-        "/img/veg/shishito.png",
-        "/img/veg/strawberry.webp",
-        "/img/veg/tomato.png",
-      ];
-      img.src = vegImages[Math.floor(Math.random() * vegImages.length)];
-      img.addEventListener("mouseover", () => {
-        img.src = vegImages[Math.floor(Math.random() * vegImages.length)];
-      });
-      img.style.objectFit = "contain";
-      img.style.position = "relative";
-      img.style.display = "inline-block";
-      img.style.width = "100px";
-      img.style.height = "100px";
-      img.style.padding = "10px";
-      document.getElementById("veg-background").appendChild(img);
-    }
-  }
-</script>
-
 <style>
   * {
-    @apply text-gray-300;
+    @apply text-gray-100;
   }
 
-  section:nth-of-type(odd) {
-    /* background-color: #a8d5b1; */
+  .holder {
+    /* Clip edges, as some of the lines don't terminate nicely. */
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 50px;
   }
-  section:nth-of-type(even) {
-    /* background-color: #1e4a25; */
-    /* @apply text-white; */
+
+  .ellipse {
+    position: absolute;
+    background: radial-gradient(
+      ellipse,
+      transparent,
+      transparent 7px,
+      #2b642dd9 7px,
+      #2b642dd9 10px,
+      transparent 11px
+    );
+    background-size: 36px 40px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .ellipse2 {
+    top: 20px;
+    left: 18px;
+    background-position: 0px -20px;
   }
 
   section {

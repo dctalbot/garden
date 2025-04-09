@@ -1,23 +1,23 @@
 ---
 import { Image } from "astro:assets";
 
-const { image, title, blurb, url } = Astro.props;
+const { image, title } = Astro.props;
 ---
 
 <div class="relative flex-1 overflow-hidden w-full h-72">
-  <a href={url} class="block relative w-full h-full">
-    <Image
-      class="absolute inset-0 w-full h-full object-cover object-center"
-      src={image}
-      alt={title}
-    />
-    <div
-      class="relative z-10 px-6 py-4 bg-black bg-opacity-50 text-white h-full flex flex-col justify-start transition transition-opacity duration-300 hover:bg-opacity-75"
-    >
-      <h2 class="font-bold text-3xl mb-2">{title}</h2>
-      <p class="text-lg">{blurb}</p>
+  <Image
+    class="absolute inset-0 w-full h-full object-cover object-center"
+    src={image}
+    alt={title}
+  />
+  <div
+    class="relative z-10 px-6 py-4 bg-black bg-opacity-70 h-full flex flex-col justify-start text-xl leading-relaxed"
+  >
+    <h2 class="font-bold text-4xl mb-2">{title}</h2>
+    <div class="card-slot-container">
+      <slot />
     </div>
-  </a>
+  </div>
 </div>
 
 <style is:global>
@@ -29,21 +29,27 @@ const { image, title, blurb, url } = Astro.props;
     font-display: swap;
   }
 
-  @font-face {
+  /* @font-face {
     font-family: "Zine";
     src: url("/fonts/zine/vector.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-  }
+  } */
 </style>
 
 <style>
   h2 {
     font-family: "Dear";
   }
-  p {
-    font-family: "Zine";
-    color: white;
+  .card-slot-container {
+    a {
+      color: #a8d5b1;
+      &:hover {
+        text-decoration-thickness: 3px;
+        text-decoration: underline wavy #2b642dd9;
+        @apply font-bold;
+      }
+    }
   }
 </style>
