@@ -126,9 +126,9 @@ const squash = Object.values(
       <div class="ellipse ellipse2"></div>
     </div>
 
-    <section id="insta-section" class="">
+    <section id="insta-section" class="mb-8 p-4">
       <div
-        class="max-w-6xl mx-auto px-4 pb-2 bg-center bg-[length:30%] bg-no-repeat"
+        class="max-w-6xl mx-auto bg-center bg-[length:30%] bg-no-repeat"
         style={`background-image: url('${labyrinth?.src || ""}');`}
       >
         <div class="flex space-x-4 overflow-x-auto">
@@ -253,6 +253,7 @@ const squash = Object.values(
 
   .holder {
     /* Clip edges, as some of the lines don't terminate nicely. */
+    display: none;
     overflow: hidden;
     position: relative;
     width: 100%;
