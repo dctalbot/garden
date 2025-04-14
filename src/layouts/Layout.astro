@@ -19,8 +19,33 @@ const { title = "McCarren Demonstration Garden - Home" } = Astro.props;
       content="Welcome to our community garden - a place where neighbors come together to grow food, friendships, and community."
     />
   </head>
-  <!-- <body style="background-color: #2A6432;"> -->
-  <body style="background-color: #021201;">
+  <body style="background-color: whitesmoke;">
     <slot />
   </body>
 </html>
+
+<style is:global>
+  @font-face {
+    font-family: "Dear";
+    src: url("/fonts/dear/vector.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Lora";
+    src: url("/fonts/lora/static/Lora-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  /* @font-face {
+    font-family: "Zine";
+    src: url("/fonts/zine/vector.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  } */
+</style>

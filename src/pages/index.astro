@@ -20,7 +20,7 @@ const images = db["media"]
   });
 
 const heroImage = Object.values(
-  import.meta.glob("/src/assets/MDG_garden-sign_01.png", {
+  import.meta.glob("/src/assets/MDG_garden-sign_1e4a25.png", {
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
@@ -87,18 +87,18 @@ const squash = Object.values(
 ---
 
 <Layout>
-  <main class="min-w-sm max-w-sm mx-auto">
-    <section id="hero-section" class="relative w-full">
+  <main class="mx-auto">
+    <section id="hero-section" class="max-w-sm mx-auto w-full">
       <Image
         src={heroImage}
-        alt="Community Garden"
-        class="px-8 object-contain py-8 h-full"
+        alt="McCarren Demo Garden"
+        class="p-8 object-contain w-full"
       />
     </section>
 
-    <section id="about-section">
+    <section id="about-section" class="mt-4 min-w-sm max-w-sm mx-auto">
       <div class="max-w-3xl mx-auto px-4 text-center">
-        <p class="text-2xl mb-8">Hello gardeners!</p>
+        <p class="text-lg mb-8">Hello gardeners!</p>
         <p class="text-lg mb-8">
           The McCarren Park Demonstration Garden is an initiative of North
           Brooklyn Mutual Aid and GrowNYC. We're a space for environmental
@@ -116,32 +116,25 @@ const squash = Object.values(
         <p class="text-lg mb-8">
           Our season runs from early May to late October, and we have three to
           four gardening shifts per week. Read on for all the information you'll
-          need to join us. See you in the garden!
+          need to join us. <br />See you in the garden!
         </p>
       </div>
     </section>
 
-    <div class="holder">
-      <div class="ellipse"></div>
-      <div class="ellipse ellipse2"></div>
-    </div>
-
-    <section id="insta-section" class="mb-8 p-4">
-      <div
-        class="max-w-6xl mx-auto bg-center bg-[length:30%] bg-no-repeat"
-        style={`background-image: url('${labyrinth?.src || ""}');`}
-      >
+    <section id="insta-section" class="mb-8 p-4 min-w-sm max-w-xl mx-auto">
+      <div class="max-w-6xl mx-auto bg-center bg-[length:30%] bg-no-repeat">
         <div class="flex space-x-4 overflow-x-auto">
           {
             images.map((i) => (
               <a
                 href={i.permalink}
+                target="_blank"
                 class="h-full rounded-2xl flex-shrink-0 aspect-square bg-black"
               >
                 <Image
                   src={i.src}
-                  width={300}
-                  height={300}
+                  width={240}
+                  height={240}
                   alt="instagram photo"
                   class="h-full rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
                 />
@@ -152,133 +145,86 @@ const squash = Object.values(
       </div>
     </section>
 
-    <div class="holder">
-      <div class="ellipse"></div>
-      <div class="ellipse ellipse2"></div>
-    </div>
+    <section id="cards-section" class="p-4 max-w-xl mx-auto">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Card image={greens} title="Getting Started">
+          <p>
+            Before your first volunteer shift, make sure to
+            <a href="https://www.grownyc.org/waiver" target="_blank"
+              >sign the waiver</a
+            >. Read through our
+            <a
+              href="https://docs.google.com/document/d/1jRYqglmPRjCGxLIhoPQzQApvLKHElvUfJz6Uus10ors/edit?tab=t.0"
+              target="_blank">Start Guide and FAQ.</a
+            >
+          </p>
+        </Card>
 
-    <section>
-      <Card image={greens} title="Getting Started">
-        <p>
-          Before your first volunteer shift, make sure to
-          <a href="https://www.grownyc.org/waiver"> sign the waiver</a>. Read
-          through our
+        <Card image={squash} title="Garden Tools">
+          <p>
+            Sign up for shifts using the
+            <a
+              href="https://docs.google.com/spreadsheets/d/1J_SYFs7HuJBDodQp0MgZ3faAvQ1oEFGRDZAptTvkzko/edit?gid=1721287157#gid=1721287157"
+              target="_blank">Volunteer Calendar</a
+            >. When you're at the garden, track what you're harvesting with the
+            <a
+              href="https://docs.google.com/forms/d/1yXXd05RVFYc7SIyqKZ-NDLo9klSCBq-4cy93X5X9hVM/edit"
+              target="_blank">Harvest Log.</a
+            >
+          </p>
+        </Card>
+
+        <Card image={strawberry} title="Keep in touch">
+          <p>
+            Follow us on <a
+              href="https://www.instagram.com/mccarrendemogarden/?hl=en"
+              target="_blank">Instagram</a
+            > to find out about our upcoming events! Join our <a
+              href="https://greenpointstrong.slack.com/join/shared_invite/zt-2d7kg7fcn-gWYETElPoGOThEWVqvoO_w#/shared-invite/email"
+              target="_blank">Slack</a
+            > chat and subscribe to our <a
+              href="https://mccarrendemogarden.substack.com/"
+              target="_blank">newsletter.</a
+            >
+          </p>
+        </Card>
+
+        <Card image={sunflower} title="Donate">
+          <p>
+            Support the garden and our mission by <a
+              href="http://donate.mccarren.garden"
+              target="_blank">making a donation.</a
+            >
+          </p>
+        </Card>
+
+        <div
+          class="sm:col-span-2 max-w-xl mx-auto overflow-hidden min-w-sm mx-auto"
+        >
           <a
-            href="https://docs.google.com/document/d/1jRYqglmPRjCGxLIhoPQzQApvLKHElvUfJz6Uus10ors/edit?tab=t.0"
+            href="https://maps.app.goo.gl/XBrreUGBQAK3nwfw8"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Start Guide and FAQ.
+            <ResponsiveImg
+              xs={mapbox640}
+              sm={mapbox768}
+              md={mapbox1024}
+              lg={mapbox1024}
+              xl={mapbox1024}
+              alt="Map of garden location"
+            />
           </a>
-        </p>
-      </Card>
-    </section>
-    <section>
-      <Card image={squash} title="Garden Tools">
-        <p>
-          Sign up for shifts using the
-          <a
-            href="https://docs.google.com/spreadsheets/d/1J_SYFs7HuJBDodQp0MgZ3faAvQ1oEFGRDZAptTvkzko/edit?gid=1721287157#gid=1721287157"
-          >
-            Volunteer Calendar</a
-          >. When you're at the garden, track what you're harvesting with the
-          <a
-            href="https://docs.google.com/forms/d/1yXXd05RVFYc7SIyqKZ-NDLo9klSCBq-4cy93X5X9hVM/edit"
-          >
-            Harvest Log.
-          </a>
-        </p>
-      </Card>
-    </section>
-    <section>
-      <Card image={strawberry} title="Keep in touch">
-        <p>
-          Follow us on <a
-            href="https://www.instagram.com/mccarrendemogarden/?hl=en"
-          >
-            Instagram
-          </a> to find out about our upcoming events! Join our <a
-            href="https://greenpointstrong.slack.com/join/shared_invite/zt-2d7kg7fcn-gWYETElPoGOThEWVqvoO_w#/shared-invite/email"
-          >
-            Slack
-          </a> chat and subscribe to our <a
-            href="https://mccarrendemogarden.substack.com/"
-          >
-            newsletter</a
-          >.
-        </p>
-      </Card>
-    </section>
-    <section>
-      <Card image={sunflower} title="Donate">
-        <p>
-          Support the garden and our mission by <a
-            href="http://donate.mccarren.garden"
-          >
-            making a donation
-          </a>.
-        </p>
-      </Card>
-    </section>
-
-    <section class="bg-black overflow-hidden">
-      <!-- src="https://api.mapbox.com/styles/v1/mapbox/outdoors-v12/static/pin-l-garden+EA4335(-73.949,40.72065)/-73.9517,40.7209,14.4,0/800x250@2x?access_token=pk.eyJ1IjoiZGN0YWxib3QiLCJhIjoiY2oyZTA1M2YyMDRzbjJxczVkNTAzOGxlbCJ9.d4nW2fje4KFA7TPNJoH8FA&logo=false" -->
-
-      <!-- xs={mapbox640}
-        sm={mapbox768}
-        md={mapbox1024}
-        lg={mapbox1280}
-        xl={mapbox1536}
-         -->
-      <a
-        href="https://maps.app.goo.gl/XBrreUGBQAK3nwfw8"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <ResponsiveImg
-          xs={mapbox640}
-          sm={mapbox640}
-          md={mapbox640}
-          lg={mapbox640}
-          xl={mapbox640}
-          alt="Map of garden location"
-        />
-      </a>
+        </div>
+      </div>
     </section>
   </main>
 </Layout>
 
 <style>
   * {
-    @apply text-gray-100;
-  }
-
-  .holder {
-    /* Clip edges, as some of the lines don't terminate nicely. */
-    display: none;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: 50px;
-  }
-
-  .ellipse {
-    position: absolute;
-    background: radial-gradient(
-      ellipse,
-      transparent,
-      transparent 7px,
-      #2b642dd9 7px,
-      #2b642dd9 10px,
-      transparent 11px
-    );
-    background-size: 36px 40px;
-    width: 100%;
-    height: 20px;
-  }
-
-  .ellipse2 {
-    top: 20px;
-    left: 18px;
-    background-position: 0px -20px;
+    color: #1e4a25;
+    font-family: "Lora";
   }
 
   section {
@@ -287,25 +233,23 @@ const squash = Object.values(
   }
 
   /* 
-  Base Color:          #2A6432 (Dark Green)
-  Lighter Shade:       #3E8650 (Medium Green)
-  Lightest Shade:      #A8D5B1 (Soft Pastel Green)
-  Darker Shade:        #1E4A25 (Deep Forest Green)
-  Accent Color:        #F2C94C (Golden Yellow)
-  Complementary Color: #64322A (Earthy Brown) 
-  */
+    Base Color:          #2A6432 (Dark Green)
+    Lighter Shade:       #3E8650 (Medium Green)
+    Lightest Shade:      #A8D5B1 (Soft Pastel Green)
+    Darker Shade:        #1E4A25 (Deep Forest Green)
+    Accent Color:        #F2C94C (Golden Yellow)
+    Complementary Color: #64322A (Earthy Brown) 
 
-  /* 
-  green gradient:
-  #052903
-  #052502
-  #042002
-  #041c02
-  #031702
-  #021201
-  #020e01
-  #010901
-  #010500
-  #000000
-  */
+    green gradient:
+    #052903
+    #052502
+    #042002
+    #041c02
+    #031702
+    #021201
+    #020e01
+    #010901
+    #010500
+    #000000
+    */
 </style>
