@@ -1,4 +1,10 @@
 ---
+const squash = Object.values(
+  import.meta.glob("/src/assets/img/veg/vintage-tile-whitesmoke.png", {
+    eager: true,
+  }),
+).map((mod) => mod.default)[0];
+
 interface Props {
   title?: string;
 }
@@ -19,7 +25,9 @@ const { title = "McCarren Demonstration Garden - Home" } = Astro.props;
       content="Welcome to our community garden - a place where neighbors come together to grow food, friendships, and community."
     />
   </head>
-  <body style="background-color: whitesmoke;">
+  <body
+    style={`background-color: rgba(245,245,245,0.95); background-image: url(${squash.src}); background-size: 300px; background-blend-mode: lighten;`}
+  >
     <slot />
   </body>
 </html>
