@@ -2,7 +2,7 @@
 
 Hi, this is where the source code for the McCarren Park Demo Garden's website lives.
 
-McCarren Park is a public park in North Brooklyn, New York, and the garden is a community space within the park. The park and its website are maintained by volunteers.
+McCarren Park is a public park in North Brooklyn, New York, and the garden is a community space within the park. The garden and its website are maintained by volunteers.
 
 ## Development
 
