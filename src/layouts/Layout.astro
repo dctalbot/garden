@@ -20,17 +20,29 @@ const { title = "McCarren Park Demonstration Garden" } = Astro.props;
     <link rel="icon" type="image/x-icon" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
-    <meta name="description" content="The McCarren Park Demonstration Garden is an initiative of North Brooklyn Mutual Aid which grows fresh food for donation to the neighborhood’s free fridges.">
+    <meta
+      name="description"
+      content="The McCarren Park Demonstration Garden is an initiative of North Brooklyn Mutual Aid which grows fresh food for donation to the neighborhood’s free fridges."
+    />
 
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mccarren.garden">
-    <meta property="og:title" content="McCarren Park Demonstration Garden">
-    <meta property="og:description" content="The McCarren Park Demonstration Garden is an initiative of North Brooklyn Mutual Aid which grows fresh food for donation to the neighborhood’s free fridges.">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mccarren.garden" />
+    <meta property="og:title" content="McCarren Park Demonstration Garden" />
+    <meta
+      property="og:description"
+      content="The McCarren Park Demonstration Garden is an initiative of North Brooklyn Mutual Aid which grows fresh food for donation to the neighborhood’s free fridges."
+    />
 
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://mccarren.garden">
-    <meta property="twitter:title" content="McCarren Park Demonstration Garden">
-    <meta property="twitter:description" content="The McCarren Park Demonstration Garden is an initiative of North Brooklyn Mutual Aid which grows fresh food for donation to the neighborhood’s free fridges.">
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://mccarren.garden" />
+    <meta
+      property="twitter:title"
+      content="McCarren Park Demonstration Garden"
+    />
+    <meta
+      property="twitter:description"
+      content="The McCarren Park Demonstration Garden is an initiative of North Brooklyn Mutual Aid which grows fresh food for donation to the neighborhood’s free fridges."
+    />
   </head>
   <body style={`background-image: url(${squash.src}); background-size: 300px;`}>
     <slot />
@@ -54,11 +66,11 @@ const { title = "McCarren Park Demonstration Garden" } = Astro.props;
     font-display: swap;
   }
 
-  /* @font-face {
+  @font-face {
     font-family: "Zine";
     src: url("/fonts/zine/vector.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
     font-display: swap;
-  } */
+  }
 </style>
