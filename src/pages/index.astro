@@ -121,22 +121,23 @@ const squash = Object.values(
       </div>
     </section>
 
-    <section id="insta-section" class="mb-8 p-4 min-w-sm max-w-xl mx-auto">
+    <section id="insta-section" class="p-4 min-w-sm max-w-xl mx-auto">
       <div class="max-w-6xl mx-auto bg-center bg-[length:30%] bg-no-repeat">
-        <div class="flex space-x-4 overflow-x-auto">
+        <div class="flex space-x-4 overflow-x-auto items-stretch">
           {
             images.map((i) => (
               <a
                 href={i.permalink}
                 target="_blank"
-                class="h-full rounded-2xl flex-shrink-0 aspect-square bg-black"
+                class="rounded-2xl flex-shrink-0 aspect-square bg-white"
               >
                 <Image
                   src={i.src}
                   width={240}
                   height={240}
                   alt="instagram photo"
-                  class="h-full rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
+                  class="rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
+                  style="border: solid 2px #1e4a25;"
                 />
               </a>
             ))
@@ -198,9 +199,7 @@ const squash = Object.values(
           </p>
         </Card>
 
-        <div
-          class="sm:col-span-2 max-w-xl mx-auto overflow-hidden min-w-sm mx-auto"
-        >
+        <div class="col-span-full min-w-sm">
           <a
             href="https://maps.app.goo.gl/XBrreUGBQAK3nwfw8"
             target="_blank"
@@ -219,20 +218,19 @@ const squash = Object.values(
       </div>
     </section>
   </main>
-</Layout>
 
-<style>
-  * {
-    color: #1e4a25;
-    font-family: "Lora";
-  }
+  <style>
+    * {
+      color: #1e4a25;
+      font-family: "Lora";
+    }
 
-  section {
-    @apply w-full;
-    min-height: 250px;
-  }
+    section {
+      @apply w-full;
+      min-height: 250px;
+    }
 
-  /* 
+    /* 
     Base Color:          #2A6432 (Dark Green)
     Lighter Shade:       #3E8650 (Medium Green)
     Lightest Shade:      #A8D5B1 (Soft Pastel Green)
@@ -252,4 +250,5 @@ const squash = Object.values(
     #010500
     #000000
     */
-</style>
+  </style>
+</Layout>

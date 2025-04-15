@@ -41,15 +41,40 @@ const xlImg = await getImage({
 });
 ---
 
-<picture>
-  <source media="(max-width: 640px)" srcset={xsImg.src} />
-  <source media="(max-width: 768px)" srcset={smImg.src} />
-  <source media="(max-width: 1024px)" srcset={mdImg.src} />
-  <source media="(max-width: 1280px)" srcset={lgImg.src} />
-  <source media="(min-width: 1280px)" srcset={xlImg.src} />
-  <img
-    src={xlImg.src}
-    alt={alt}
-    class="rounded-3xl w-full max-h-[250px] object-cover overflow-hidden mx-auto hover:opacity-75"
-  />
-</picture>
+<div class="bg-white overflow-hidden sketchy hover:opacity-75">
+  <picture>
+    <source media="(max-width: 640px)" srcset={xsImg.src} />
+    <source media="(max-width: 768px)" srcset={smImg.src} />
+    <source media="(max-width: 1024px)" srcset={mdImg.src} />
+    <source media="(max-width: 1280px)" srcset={lgImg.src} />
+    <source media="(min-width: 1280px)" srcset={xlImg.src} />
+    <img src={xlImg.src} alt={alt} class="w-full max-h-[240px] object-cover" />
+  </picture>
+</div>
+
+<style>
+  .sketchy {
+    width: 100%;
+    display: inline-block;
+    border: 3px solid #1e4a25;
+    font-size: 2.5rem;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    text-transform: uppercase;
+    letter-spacing: 0.3ch;
+    background: #ffffff;
+    position: relative;
+
+    &::before {
+      content: "";
+      border: 2px solid #1e4a25;
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+      border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+    }
+  }
+</style>

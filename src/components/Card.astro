@@ -1,21 +1,19 @@
 ---
-import { Image } from "astro:assets";
-
 const { image, title } = Astro.props;
 ---
 
 <div
-  class="card-container rounded-3xl relative flex-1 overflow-hidden w-full h-72"
+  class="mx-auto max-w-xs card-container paper-note flex-1 overflow-hidden w-full"
 >
-  <Image
+  <!-- <Image
     class="absolute inset-0 w-full h-full object-cover object-center"
     src={image}
     alt={title}
-  />
+  /> -->
   <div
-    class="relative z-10 px-6 py-4 bg-black bg-opacity-80 h-full flex flex-col justify-start text-xl leading-relaxed"
+    class="relative z-10 px-6 py-4 bg-opacity-90 flex flex-col justify-start text-lg leading-relaxed h-full"
   >
-    <h2 class="font-bold text-4xl mb-2">{title}</h2>
+    <h2 class="text-4xl mb-2">{title}</h2>
     <div class="card-slot-container">
       <slot />
     </div>
@@ -25,17 +23,59 @@ const { image, title } = Astro.props;
 <style>
   h2 {
     font-family: "Dear";
-    color: whitesmoke;
   }
   .card-slot-container {
-    * {
-      color: whitesmoke;
-    }
     a {
-      color: #a8d5b1;
+      @apply font-extrabold;
+      text-decoration: underline #1e4a25;
       &:hover {
-        text-decoration: underline wavy whitesmoke;
+        color: #3e8650; /* manually calculated lighter color */
       }
+    }
+  }
+
+  .card-container {
+    border: solid #1e4a25;
+    background-color: white;
+  }
+
+  .paper-note:first-child {
+    border-width: 3px 4px 3px 5px;
+    border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
+    transform: rotate(2deg);
+
+    > * {
+      transform: rotate(-2deg);
+    }
+  }
+
+  .paper-note:nth-child(2) {
+    border-width: 3px 3px 5px 5px;
+    border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+    transform: rotate(-2deg);
+
+    > * {
+      transform: rotate(2deg);
+    }
+  }
+
+  .paper-note:nth-child(3) {
+    border-width: 5px 3px 3px 5px;
+    border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    transform: rotate(2deg);
+
+    > * {
+      transform: rotate(-2deg);
+    }
+  }
+
+  .paper-note:nth-child(4) {
+    border-width: 4px 5px 3px 4px;
+    border-radius: 6% 94% 5% 95%/95% 5% 93% 4%;
+    transform: rotate(-1deg);
+
+    > * {
+      transform: rotate(1deg);
     }
   }
 </style>
