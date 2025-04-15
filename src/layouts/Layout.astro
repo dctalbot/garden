@@ -1,6 +1,6 @@
 ---
 const squash = Object.values(
-  import.meta.glob("/src/assets/img/veg/vintage-tile-whitesmoke.png", {
+  import.meta.glob("/src/assets/img/veg/vintage-tile-whitesmoke-5.png", {
     eager: true,
   }),
 ).map((mod) => mod.default)[0];
@@ -22,9 +22,7 @@ const { title = "McCarren Demonstration Garden - Home" } = Astro.props;
     <title>{title}</title>
     <meta name="description" content="McCarren Park Garden" />
   </head>
-  <body
-    style={`background-color: rgba(245,245,245,0.95); background-image: url(${squash.src}); background-size: 300px; background-blend-mode: lighten;`}
-  >
+  <body style={`background-image: url(${squash.src}); background-size: 300px;`}>
     <slot />
   </body>
 </html>
