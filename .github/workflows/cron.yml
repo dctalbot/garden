@@ -30,4 +30,4 @@ jobs:
           git config user.email 'dave.c.talbot@gmail.com'
           git add .
           git commit --allow-empty --no-verify -m 'Automated build commit' 
-          git push
+          git push https://dctalbot:${GITHUB_TOKEN}@github.com/dctalbot/garden.git HEAD:main
