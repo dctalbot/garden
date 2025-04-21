@@ -6,7 +6,11 @@ McCarren Park is a public park in North Brooklyn, New York, and the garden is a 
 
 ## Development
 
-There are some canonical dev commands available in the `Makefile`. You can learn about them by runnng `make help`.
+There are some canonical dev commands available in the `Makefile`. You can list them by running:
+
+```console
+make help
+```
 
 ### Tech stack:
 

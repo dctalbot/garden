@@ -1,18 +1,22 @@
 .PHONY: lint
 lint: ## Run static analysis checks
-	npx prettier . --write
-	git diff --exit-code
+	npx prettier . --write;
+	git diff --exit-code;
 
 .PHONY: start
 start: ## Start a dev server
-	npm i
-	npm run dev
+	npm i;
+	npx astro dev;
 
 .PHONY: start-prod
 start-prod: ## Start a preview server of the production build
 	rm -rf dist;
-	npm run astro build;
-	npm run astro preview;
+	npx astro build;
+	npx astro preview;
+
+.PHONY: build
+build: ## Build a production bundle
+	npx astro build;
 
 .PHONY: compress-images
 compress-images: ## Reduce image sizes
