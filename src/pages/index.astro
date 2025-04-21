@@ -123,13 +123,15 @@ const squash = Object.values(
 
     <section id="insta-section" class="p-4 min-w-sm max-w-3xl mx-auto">
       <div class="max-w-6xl mx-auto bg-center bg-[length:30%] bg-no-repeat">
-        <div class="flex space-x-4 overflow-x-auto items-stretch">
+        <div
+          class="flex space-x-4 overflow-x-auto items-stretch snap-x snap-mandatory"
+        >
           {
             images.map((i) => (
               <a
                 href={i.permalink}
                 target="_blank"
-                class="rounded-2xl flex-shrink-0 aspect-square bg-white"
+                class="rounded-2xl flex-shrink-0 aspect-square bg-white snap-center"
               >
                 <Image
                   src={i.src}
