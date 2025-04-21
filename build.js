@@ -2,13 +2,13 @@ import https from "https";
 import fs from "fs";
 
 /**
- * Fetches media data from Instagram API. API reference: https://developers.facebook.com/docs/instagram-platform/reference/instagram-media
+ * Fetch Instagram media. Docs: https://developers.facebook.com/docs/instagram-platform/reference/instagram-media
  *
  * @returns {Promise<Array<{id: string, media_url: string, permalink: string, timestamp: string}>>}
- * An array of media objects.
+ * An array of Media objects.
  * @throws Will throw an error if the request fails.
  */
-async function getMedia() {
+async function fetchMedia() {
   const REQUEST_URL =
     "https://graph.instagram.com/v21.0/me/media?fields=media_url,id,timestamp,permalink";
 
@@ -38,6 +38,51 @@ async function getMedia() {
 
   const jsonData = JSON.parse(res);
   return jsonData.data;
+}
+
+/**
+ * Fetch Partiful events. There is no API, so we just hack on https://partiful.com/u/jej68Pa0PBSWZdQOoWqey4O95Zt2
+ *
+ * @returns {Promise<Array<{id: string, startDate: string, title: string}>>}
+ * An array of Event objects.
+ * @throws Will throw an error if the request fails.
+ */
+async function fetchEvents() {
+  const REQUEST_URL = "https://api.partiful.com/getPublishedEvents";
+
+  const res = await new Promise((resolve, reject) => {
+    const req = https.request(
+      REQUEST_URL,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "*/*",
+        },
+      },
+      (res) => {
+        let data = "";
+        res.on("data", (chunk) => {
+          data += chunk;
+        });
+        res.on("end", () => {
+          resolve(data);
+        });
+        res.on("error", (err) => {
+          reject(err);
+        });
+      },
+    );
+
+    req.write(
+      '{"data":{"params":{"userId":"jej68Pa0PBSWZdQOoWqey4O95Zt2"},"userId":null}}',
+    );
+
+    req.end();
+  });
+
+  const jsonData = JSON.parse(res);
+  return jsonData.result.data;
 }
 
 /**
@@ -81,10 +126,7 @@ function writeImgFile(inputData, path) {
   });
 }
 
-/**
- * @returns {Array<{id: string, media_url: string, permalink: string, timestamp: string}>}
- */
-function filterForNewMedia(stored, fetched) {
+function filterByID(stored, fetched) {
   const existingIds = stored.map(({ id }) => id);
   return fetched.filter(({ id }) => !existingIds.includes(id));
 }
@@ -92,21 +134,23 @@ function filterForNewMedia(stored, fetched) {
 /**
  * gets media data from file store
  *
+ * @param {string} collectionName - The name of the collection to retrieve from the database.
  * @returns {Array<{id: string, permalink: string, timestamp: string}>}
  * An array of media objects.
  */
-function getStoredMedia() {
-  return JSON.parse(fs.readFileSync("./src/db.json", "utf-8"))["media"];
+function getStored(collectionName) {
+  return JSON.parse(fs.readFileSync("./src/db.json", "utf-8"))[collectionName];
 }
 
 /**
  * Updates the file store
  *
- * @param {{id: string, permalink: string, timestamp: string}} m - The new media object.
+ * @param {string} collectionName - The name of the collection to mutate in the database.
+ * @param x - The new record.
  */
-function insertMedia(m) {
+function insertRecord(collectionName, x) {
   const db = JSON.parse(fs.readFileSync("./src/db.json", "utf-8"));
-  db["media"] = [...db["media"], m];
+  db[collectionName] = [...db[collectionName], x];
   fs.writeFileSync("./src/db.json", JSON.stringify(db, null, 2));
 }
 
@@ -118,17 +162,34 @@ function insertMedia(m) {
  */
 async function main() {
   try {
-    const storedMedia = getStoredMedia();
-    const fetchedMedia = await getMedia();
-    const newMedia = filterForNewMedia(storedMedia, fetchedMedia);
+    const storedMedia = getStored("media");
+    const fetchedMedia = await fetchMedia();
+    const newMedia = filterByID(storedMedia, fetchedMedia);
 
     for (const { id, media_url, timestamp, permalink } of newMedia) {
       const bytes = await getImgBytes(media_url);
       writeImgFile(Promise.resolve(bytes), `./src/assets/img/insta/${id}.jpg`);
-      insertMedia({
+      insertRecord("media", {
         id,
         timestamp,
         permalink,
+      });
+    }
+  } catch (err) {
+    console.error(`Error: ${err.message}`);
+  }
+
+  try {
+    const storedEvents = getStored("events");
+    const fetchedEvents = await fetchEvents();
+    const newEvents = filterByID(storedEvents, fetchedEvents);
+
+    for (const { id, startDate, title } of newEvents) {
+      insertRecord("events", {
+        id,
+        timestamp: startDate,
+        title,
+        permalink: `https://partiful.com/e/${id}`,
       });
     }
   } catch (err) {
