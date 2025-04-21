@@ -29,7 +29,7 @@ jobs:
           git config user.name 'dctalbot'
           git config user.email 'dave.c.talbot@gmail.com'
           git add .
-          git commit --allow-empty --no-verify -m 'Automated build commit' 
+          git commit -m 'Automated build commit' 
           git push
 
   deploy:
