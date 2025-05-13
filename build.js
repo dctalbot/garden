@@ -4,13 +4,13 @@ import fs from "fs";
 /**
  * Fetch Instagram media. Docs: https://developers.facebook.com/docs/instagram-platform/reference/instagram-media
  *
- * @returns {Promise<Array<{id: string, media_url: string, permalink: string, timestamp: string}>>}
+ * @returns {Promise<Array<{id: string, media_url: string, permalink: string, timestamp: string, thumbnail_url?: string}>>}
  * An array of Media objects.
  * @throws Will throw an error if the request fails.
  */
 async function fetchMedia() {
   const REQUEST_URL =
-    "https://graph.instagram.com/v21.0/me/media?fields=media_url,id,timestamp,permalink";
+    "https://graph.instagram.com/v21.0/me/media?fields=media_url,id,timestamp,permalink,thumbnail_url";
 
   const res = await new Promise((resolve, reject) => {
     https.get(
@@ -166,8 +166,15 @@ async function main() {
     const fetchedMedia = await fetchMedia();
     const newMedia = filterByID(storedMedia, fetchedMedia);
 
-    for (const { id, media_url, timestamp, permalink } of newMedia) {
-      const bytes = await getImgBytes(media_url);
+    for (const {
+      id,
+      media_url,
+      timestamp,
+      permalink,
+      thumbnail_url,
+    } of newMedia) {
+      const imgToDownload = thumbnail_url || media_url;
+      const bytes = await getImgBytes(imgToDownload);
       writeImgFile(Promise.resolve(bytes), `./src/assets/img/insta/${id}.jpg`);
       insertRecord("media", {
         id,
