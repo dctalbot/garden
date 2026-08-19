@@ -39,7 +39,7 @@ const { image, title } = Astro.props;
     background-color: white;
   }
 
-  .paper-note:first-child {
+  .paper-note:nth-child(4n + 1) {
     border-width: 3px 4px 3px 5px;
     border-radius: 95% 4% 92% 5%/4% 95% 6% 95%;
     transform: rotate(2deg);
@@ -49,7 +49,7 @@ const { image, title } = Astro.props;
     }
   }
 
-  .paper-note:nth-child(2) {
+  .paper-note:nth-child(4n + 2) {
     border-width: 3px 3px 5px 5px;
     border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
     transform: rotate(-2deg);
@@ -59,7 +59,7 @@ const { image, title } = Astro.props;
     }
   }
 
-  .paper-note:nth-child(3) {
+  .paper-note:nth-child(4n + 3) {
     border-width: 5px 3px 3px 5px;
     border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
     transform: rotate(2deg);
@@ -69,7 +69,7 @@ const { image, title } = Astro.props;
     }
   }
 
-  .paper-note:nth-child(4) {
+  .paper-note:nth-child(4n) {
     border-width: 4px 5px 3px 4px;
     border-radius: 6% 94% 5% 95%/95% 5% 93% 4%;
     transform: rotate(-1deg);
