@@ -11,7 +11,7 @@ const { image, title } = Astro.props;
     alt={title}
   /> -->
   <div
-    class="relative z-10 px-6 py-4 bg-opacity-90 flex flex-col justify-start text-lg leading-relaxed h-full"
+    class="relative z-10 px-6 py-4 flex flex-col justify-start text-lg leading-relaxed h-full"
   >
     <h2 class="text-4xl mb-2">{title}</h2>
     <div class="card-slot-container">
@@ -21,6 +21,8 @@ const { image, title } = Astro.props;
 </div>
 
 <style>
+  @reference "../styles/global.css";
+
   h2 {
     font-family: "Dear";
   }

@@ -124,21 +124,21 @@ const squash = Object.values(
     <section id="insta-section" class="p-4 min-w-sm max-w-3xl mx-auto">
       <div class="max-w-6xl mx-auto bg-center bg-[length:30%] bg-no-repeat">
         <div
-          class="flex space-x-4 overflow-x-auto items-stretch snap-x snap-mandatory"
+          class="flex gap-4 overflow-x-auto items-stretch snap-x snap-mandatory"
         >
           {
             images.map((i) => (
               <a
                 href={i.permalink}
                 target="_blank"
-                class="rounded-2xl flex-shrink-0 aspect-square bg-white snap-center"
+                class="rounded-2xl shrink-0 aspect-square bg-white snap-center"
               >
                 <Image
                   src={i.src}
                   width={240}
                   height={240}
                   alt="instagram photo"
-                  class="rounded-2xl object-cover flex-shrink-0 aspect-square hover:opacity-75"
+                  class="rounded-2xl object-cover shrink-0 aspect-square hover:opacity-75"
                   style="border: solid 2px #1e4a25;"
                 />
               </a>
@@ -232,6 +232,8 @@ const squash = Object.values(
   </main>
 
   <style>
+    @reference "../styles/global.css";
+
     * {
       color: #1e4a25;
       font-family: "Lora";
